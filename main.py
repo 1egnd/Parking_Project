@@ -28,6 +28,10 @@ def subMenu(): #Admin Page
 
     label = tk.Label(sub, text="ADMINISTRATOR",font=("Helvetica", 16))
     label.place(x=330, y=25, height=40, width=180)
+    entryUser = tk.Entry(sub)  # input box
+    entryUser.place(x=330, y=50, height=30, width=50)
+    entryPas = tk.Entry(sub)  # input box
+    entryPas.place(x=330, y=100, height=30, width=50)
     Button(sub, text='Edit CSV', command=entrySave, bg="gray20", fg="white", highlightbackground="gray20",
            activebackground="deep sky blue").place(x=330, y=300, height=40, width=180)
     Button(sub, text='Export CSV', command=black, bg="gray20", fg="white", highlightbackground="gray20",
@@ -49,27 +53,34 @@ frame3.grid(row=1, column=1)
 frame4.grid(row=0, column=1)
 
 
-label = tk.Label(frame1, text="PARKING ID")
+label = tk.Label(frame1, text="PARKING ID",font=("Helvetica", 16))
 entry = tk.Entry(frame1) #input box
 
-label.place(x=330, y=25, height=20, width=80)
+label.place(x=320, y=25, height=20, width=120)
 entry.place(x=10, y=50, height=300, width=700)
 
 
 def array():
     spot = 0
-    parkingArray = [[spot for i in range(2)] for j in range(28)]
+    global parkingArray
+    parkingArray = [["empty" for i in range(2)] for j in range(56)]
+    parkingArray [0][0] = "mike"
+    parkingArray [0][1] = "MIKE@G"
+    parkingArray [1][0] = "john"
+    parkingArray [1][1] = "john@G"
+    #make if statement that check array for val of 0 then make gui button green
     print(parkingArray)
+    #parkingArrayVisitor = [["" for i in range(2)] for j in range(28)]
 
-
-def entrySave(parkingArray, spot):
+def entrySave():
     etest = 1
-    eSave = entry.get()
+    eSave = int(entry.get())
     print(eSave)
-    parkingArray.append([etest, ])
+    parkingArray [eSave] [1] = "bla"
+    #parkingArray [1] [0] = eSave
     #parkingArray.append(eSave)
     print(parkingArray)
-    print(spot)
+    #print(spot)
 
 
 def black():
