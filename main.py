@@ -32,13 +32,13 @@ def subMenu(): #Admin Page
     label = tk.Label(sub, text="ADMINISTRATOR",font=("Helvetica", 16))
     label.place(x=330, y=25, height=40, width=180)
     label = tk.Label(sub, text="Username") # Username Label
-    label.place(x=330, y=25, height=40, width=180)
+    label.place(x=250, y=100, height=30, width=60)
     label = tk.Label(sub, text="Password") # Password Label
-    label.place(x=330, y=25, height=40, width=180)
+    label.place(x=250, y=150, height=30, width=60)
     entryUser = tk.Entry(sub)  # Username input box
-    entryUser.place(x=330, y=100, height=30, width=50)
+    entryUser.place(x=330, y=100, height=30, width=180)
     entryPas = tk.Entry(sub)  # Password input box
-    entryPas.place(x=330, y=150, height=30, width=50)
+    entryPas.place(x=330, y=150, height=30, width=180)
     Button(sub, text='Edit CSV', command=entrySave, bg="gray20", fg="white", highlightbackground="gray20",
            activebackground="deep sky blue").place(x=330, y=300, height=40, width=180) #CSV Edit Button
     Button(sub, text='Export CSV', command=black, bg="gray20", fg="white", highlightbackground="gray20",
