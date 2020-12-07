@@ -11,13 +11,14 @@ Computer Science
 from tkinter import *
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import messagebox
 import datetime
 import re
 master = Tk()
 
 #Main Page
 master.title("Parking") #Window Title
-master.geometry("800x800") #Box size
+master.geometry("1920x1080") #Box size (1920x1080 but small for test)
 master.configure(background="grey90") #GUI Background color
 
 def subMenu(): #Admin Page
@@ -62,9 +63,29 @@ frame4.grid(row=0, column=1)
 
 label = tk.Label(frame1, text="PARKING ID",font=("Helvetica", 16)) #Parking ID Label
 entry = tk.Entry(frame1) #Main entry box
+Nameentry = tk.Entry(frame1) #Main entry box
+Namelabel = tk.Label(frame1, text="Name",font=("Helvetica", 12))
 
 label.place(x=320, y=25, height=20, width=120)
-entry.place(x=10, y=50, height=300, width=700)
+entry.place(x=10, y=50, height=270, width=700) #was 300
+Nameentry.place(x=10, y=355, height=50, width=700)
+Namelabel.place(x=320, y=330, height=20, width=120)
+
+def start():
+    spotButton.configure(relief=tk.SUNKEN,bg="red")
+
+
+def stop():
+    spotButton.configure(relief=tk.RAISED, state=tk.ACTIVE)
+
+#counter
+keypadCounter = 0
+for i in range(1, 4):
+    for j in range(0, 3):
+        keypadCounter = keypadCounter + 1
+        #print(i, ' ', j, " ", keypadCounter)
+        spotButton = Button(frame4, text="1", command=lambda keypadCounter=keypadCounter: start(), bg="green", fg="black", highlightbackground="grey20", activebackground="red", relief=FLAT)
+        spotButton.grid(row=2, column=1)
 
 
 def array():
@@ -82,15 +103,31 @@ def array():
 
 def entrySave():
     etest = 1
-    eSave = (entry.get()) #Taking string from input box on save press
+    eSave = (entry.get()) #Taking string from input box on save press #Nameentry.get()
     res = [re.findall(r'(\d+)(\w+?)', eSave)[0] ]
     print(res)
     print(res[0][0])
     print(res[0][1])
+    #print(res[0][2])
     intElement = int(res[0][0])
+    name = (Nameentry.get())
 
-    parkingArray[intElement][1] = res[0][1]
+    parkingArray[intElement][2] =  res[0][1]
+    parkingArray[intElement][1] = intElement
+    parkingArray[intElement][0] = name
     print(parkingArray)
+
+def veiw():
+    eSave = (entry.get())  # Taking string from input box on save press #Nameentry.get()
+    res = [re.findall(r'(\d+)(\w+?)', eSave)[0]]
+    intElement = int(res[0][0])
+    Name = (parkingArray[intElement][0])
+    namePop(Name)
+
+def namePop(Name):
+    messagebox.showinfo("Name", Name)
+
+
     '''
 
     #map_elist =
@@ -118,7 +155,7 @@ label.place(x=200, y=200, height=80, width=400)
 #Buttons
 Button(frame2, text='Save',command=entrySave, bg="gray20", fg="white", highlightbackground="gray20", activebackground="deep sky blue").place(x=230, y=100, height=60, width=120)
 
-Button(frame2, text='View',command=black, bg="gray20", fg="white", highlightbackground="gray20", activebackground="deep sky blue").place(x=430, y=100, height=60, width=120)
+Button(frame2, text='View',command=veiw, bg="gray20", fg="white", highlightbackground="gray20", activebackground="deep sky blue").place(x=430, y=100, height=60, width=120)
 
 Button(frame2, text='Admin',command=subMenu, bg="gray20", fg="white", highlightbackground="gray20", activebackground="deep sky blue").place(x=330, y=250, height=60, width=120)
 
