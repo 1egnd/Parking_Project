@@ -49,6 +49,7 @@ def subMenu(): #Admin Page
 
 
 
+
 #Frames
 frame1 = tk.Frame(master, width=750, height=400)
 frame2 = tk.Frame(master, width=750, height=400)
@@ -71,22 +72,36 @@ entry.place(x=10, y=50, height=270, width=700) #was 300
 Nameentry.place(x=10, y=355, height=50, width=700)
 Namelabel.place(x=320, y=330, height=20, width=120)
 
-def start():
-    spotButton.configure(relief=tk.SUNKEN,bg="red")
-
-
-def stop():
-    spotButton.configure(relief=tk.RAISED, state=tk.ACTIVE)
+toggle = []
+def start(spotNum):
+    arraySpot = spotNum
+    if toggle [spotNum] == "g":
+        spots[spotNum].configure(relief=tk.SUNKEN, bg="red")
+        toggle[spotNum] = "r"
+    else:
+        spots[spotNum].configure(relief=tk.RAISED, bg="green")
+        toggle[spotNum] = "g"
 
 #counter
+spots = []
 keypadCounter = 0
-for i in range(1, 4):
-    for j in range(0, 3):
+for i in range(1, 29): #start at one and give 29 spots
+    for j in range(0, 2):
+        if j == 0:
+            letter = "A"
+        else:
+            letter = "B"
+        parkingSpotz = str(i) + letter
+        #print(parkingSpotz)
+        #print(i, ' ', letter, " ")
+        arraySpot = Button(frame4, text=parkingSpotz, command=lambda keypadCounter=keypadCounter: start(keypadCounter), bg="green", fg="black", highlightbackground="grey20", activebackground="red", relief=FLAT)
+        arraySpot.grid(row=j, column=i)
+        #print(arraySpot)
+        spots.append(arraySpot)
+        print(spots)
+        toggle.append("g")
         keypadCounter = keypadCounter + 1
-        #print(i, ' ', j, " ", keypadCounter)
-        spotButton = Button(frame4, text="1", command=lambda keypadCounter=keypadCounter: start(), bg="green", fg="black", highlightbackground="grey20", activebackground="red", relief=FLAT)
-        spotButton.grid(row=2, column=1)
-
+#print(spots)
 
 def array():
     spot = 0
