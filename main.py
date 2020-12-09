@@ -99,7 +99,7 @@ for i in range(1, 29): #start at one and give 29 spots
         #print(arraySpot)
         spots.append(arraySpot)
         print(spots)
-        toggle.append("g")
+        toggle.append("g") #green
         keypadCounter = keypadCounter + 1
 #print(spots)
 
@@ -155,7 +155,6 @@ def namePop(Name):
     #parkingArray.append(eSave)
     print(parkingArray)
     #print(spot)
-
     '''
 
 def black():
