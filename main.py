@@ -27,29 +27,6 @@ master.geometry("1920x1080") #Box size (1920x1080 but small for test)
 master.configure(background="grey90") #GUI Background color
 
 
-
-
-'''
-def emailSend(): #parkingpostoaknoreply@gmail.com #!Postoakparking1
-
-    sender = 'from@fromdomain.com'
-    receivers = ['to@todomain.com']
-
-    message = """From: From Person <from@fromdomain.com>
-    To: To Person <to@todomain.com>
-    Subject: SMTP e-mail test
-
-    This is a test e-mail message.
-    """
-
-    smtpObj = smtplib.SMTP('localhost')
-    smtpObj.sendmail(sender, receivers, message)
-    print("Successfully sent email")
-'''
-
-
-
-
 global entryUser
 def subMenu(): #Admin Page
     sub = Toplevel(master)
@@ -93,10 +70,10 @@ def editText():
 
 
 #Frames
-frame1 = tk.Frame(master, width=750, height=400)
-frame2 = tk.Frame(master, width=750, height=400)
-frame3 = tk.Frame(master, width=800, height=400)
-frame4 = tk.Frame(master, width=800, height=400)
+frame1 = tk.Frame(master, width=750, height=400, background="grey90")
+frame2 = tk.Frame(master, width=750, height=400, background="grey90")
+frame3 = tk.Frame(master, width=800, height=400, background="grey90")
+frame4 = tk.Frame(master, width=800, height=400, background="grey90")
 
 frame1.grid(row=0, column=0)
 frame2.grid(row=1, column=0)
@@ -139,12 +116,12 @@ for i in range(1, 29): #start at one and give 29 spots
         parkingSpotz = str(i) + letter
         #print(parkingSpotz)
         #print(i, ' ', letter, " ")
-        arraySpot = Button(frame4, text=parkingSpotz, command=lambda keypadCounter=keypadCounter: start(keypadCounter), bg="green", fg="black", highlightbackground="grey20", activebackground="red", relief=FLAT)
-        arraySpot.grid(row=j, column=i)
+        arraySpot = Button(frame4, text=parkingSpotz, command=lambda keypadCounter=keypadCounter: start(keypadCounter), bg="green", fg="black", highlightbackground="black", activebackground="red", relief=FLAT)
+        arraySpot.grid(row=j, column=i, pady=5, padx=1)
         parkingSpotsArray.append(parkingSpotz)
         #print(arraySpot)
         spots.append(arraySpot)
-        print(spots)
+        #print(spots)
         toggle.append("g") #green
         keypadCounter = keypadCounter + 1
 #print(spots)
@@ -182,14 +159,20 @@ def entrySave(): #Parking Spot I.D Saving Logic
     print(parkingArray)
 
 def veiw(): #CHANGE TO VIEW
-    try:
-        eSave = (entry.get())  # Taking string from input box on save press #Nameentry.get()
-        res = [re.findall(r'(\d+)(\w+?)', eSave)[0]]
-        intElement = int(res[0][0])
-        Name = (parkingArray[intElement][0])
-    except IndexError:
+    eSave = (entry.get())  # Taking string from input box on save press #Nameentry.get()
+    res = [re.findall(r'(\d+)(\w+?)', eSave)[0]]
+    intElement = int(res[0][0])
+    Name = (parkingArray[intElement][0])
+    print(Name)
+    print("in view")
+    print(res[0][1])
+    print(type(res[0][1]))
+    stringEx = res[0][1]
+    if ((stringEx == "a","A" or stringEx == "b","B" )): #error hand
+        print("ok")
+        namePop(Name)
+    else:
         messagebox.showinfo("Error", " Invalid Spot")
-    namePop(Name)
 
 def namePop(Name):
     messagebox.showinfo("Name", Name)
@@ -228,13 +211,17 @@ lbl = Label(frame3, font=('calibri', 40, 'bold'),
             foreground='white') #CHANGE TO WHITE TO FIX COLOR ISSUE
 lbl.pack(anchor='center')
 
-def send_mail():
+def send_mail(): #pass @gmail person string
+    SUBJECT = "Car Bot Notification - Do Not Reply"
+
+    TEXT = "Please Move Your Car!"
+    message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.login("username without @gmail.com", "password")
+    server.login("parkingpostoaknoreply" , "!Postoakparking1")
     server.sendmail(
-        "from@gmail.com",
-        "to @ post oak.com",
-        "this message is from python--2")
+        "parkingpostoaknoreply@gmail.com",
+        "parkingpostoaknoreply@gmail.com",
+        message) #message
     server.quit()
 
 
