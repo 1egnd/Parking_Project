@@ -1,4 +1,2 @@
-dob,@gm
-lol,@gmai
-ZZZ,YY@YY
-Brooks Farish, isegiuh@stuihswiuf
+Brooks Farish, Test@TestMail.com
+Brooks Farish, brooksfarish@stu.postoakschool.org
